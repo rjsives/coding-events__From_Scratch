@@ -8,21 +8,27 @@ import java.util.Objects;
 public class Event {
     private int id;
     private static int nextId = 1;
-    @NotBlank
+    @NotBlank(message = "Name is a required field. Must not be blank.")
     @Size(min = 3, max = 50, message = "Name must be between 3 and 50 characters.")
     private String name;
     @Size(max = 500, message = "Description too long. 500 character limit.")
     private String description;
 
-    @NotBlank
+    @NotBlank(message = "Email is a required field. Must not be blank.")
     @Email(message = "Invalid email. Please try again.")
     private String contactEmail;
 
 
-    public Event(String name, String description, String ContactEmail) {
+    public Event(String name, String description, String contactEmail) {
+        this();
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
+        this.id = nextId;
+        nextId++;
+    }
+
+    public Event(){
         this.id = nextId;
         nextId++;
     }
@@ -43,12 +49,8 @@ public class Event {
         this.description = description;
     }
 
-    public String getContactEmail() {
-        return contactEmail;
-    }
-    public void setContactEmail(String contactEmail) {
-        this.contactEmail = contactEmail;
-    }
+    public String getContactEmail() {return contactEmail;}
+    public void setContactEmail(String contactEmail) {this.contactEmail = contactEmail;}
 
     public int getId() {
         return id;
