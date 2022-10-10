@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+<!DOCTYPE html>   <div class="form-group">
+    <label>
+        Description
+        <input type="text" name="description" class="form-control">
+    </label>
+</div>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body class="container">
@@ -14,6 +19,7 @@
             <th>ID</th>
             <th>Event name</th>
             <th>Description</th>
+            <th>Contact Email</th>
 <!--            <th>Address</th>-->
         </tr>
     </thead>
@@ -21,7 +27,8 @@
         <tr>
             <td th:text="${event.id}"></td>
             <td th:text="${event.name}"></td>
-            <td th:text="${event.description}"></td>
+            <td th:text="${event.description}">
+            <td th:text="${event.contactEmail}"></td>
             <td>
                 <a th:href="@{/events/edit/{id}(id=${event.id})}">Edit</a>
             </td>
