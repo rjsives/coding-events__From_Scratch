@@ -1,8 +1,6 @@
 package org.lauchcode.codingevents.models;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.Objects;
 
 public class Event {
@@ -18,20 +16,42 @@ public class Event {
     @Email(message = "Invalid email. Please try again.")
     private String contactEmail;
 
+    @NotBlank(message = "Location is a required field. Must not be blank.")
+    @Size(min = 2, max = 50, message = "Name must be between 3 and 50 characters.")
+    private String location;
 
-    public Event(String name, String description, String contactEmail) {
+//    @AssertTrue(message = "Registrations is required.")
+//    private boolean mustRegister;
+//
+//    @Positive(message = "Number of Attendees must be greater than zero")
+//    private int numberOfAttendees;
+
+    private EventType type;
+
+
+    public Event(String name, String description, String contactEmail, EventType type) {
         this();
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
-        this.id = nextId;
-        nextId++;
+        this.type=type;
     }
+
+
 
     public Event(){
         this.id = nextId;
         nextId++;
     }
+
+    public String getLocation(){
+        return this.location;
+    }
+
+    public void setLocation(String location){
+        this.location = location;
+    }
+
 
     public String getName() {
         return name;
@@ -52,9 +72,31 @@ public class Event {
     public String getContactEmail() {return contactEmail;}
     public void setContactEmail(String contactEmail) {this.contactEmail = contactEmail;}
 
+    public EventType getType() {return type;}
+
+    public void setType(EventType type) {
+        this.type = type;
+    }
+
     public int getId() {
         return id;
     }
+
+//    public boolean isMustRegister() {
+//        return mustRegister;
+//    }
+//
+//    public void setMustRegister(boolean mustRegister) {
+//        this.mustRegister = mustRegister;
+//    }
+//
+//    public int getNumberOfAttendees() {
+//        return numberOfAttendees;
+//    }
+//
+//    public void setNumberOfAttendees(int numberOfAttendees) {
+//        this.numberOfAttendees = numberOfAttendees;
+//    }
 
     @Override
     public String toString() {
