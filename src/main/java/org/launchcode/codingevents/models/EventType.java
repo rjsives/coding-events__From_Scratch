@@ -1,4 +1,4 @@
-package org.lauchcode.codingevents.models;
+package org.launchcode.codingevents.models;
 
 public enum EventType {
 

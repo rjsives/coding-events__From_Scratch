@@ -1,6 +1,6 @@
-package data;
+package org.launchcode.codingevents.data;
 
-import org.lauchcode.codingevents.models.Event;
+import org.launchcode.codingevents.models.Event;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
