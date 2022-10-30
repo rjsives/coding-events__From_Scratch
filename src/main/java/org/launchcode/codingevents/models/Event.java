@@ -40,7 +40,7 @@ public class Event {
     public Event(String name, String description, String contactEmail, EventType type) {
         this.description = description;
         this.contactEmail = contactEmail;
-        this.type=type;
+        this.type = type;
     }
 
 
