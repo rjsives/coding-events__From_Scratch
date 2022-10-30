@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-
 <body class="container">
 
 <nav th:replace="fragments :: navigation"></nav>
@@ -18,7 +17,17 @@
         </label>
     </div>
     <div class="form-group">
-        <label>Description
+        <label>Email
+            <input type="text" th:value="${event.contactEmail}" name="contactEmail" class="form-control">
+        </label>
+    </div>
+    <div class="form-group">
+        <label>Type (enter one): CONFERENCE, WORKSHOP, MEETUP, SOCIAL (MUST be all caps)
+                <input type="text" th:value="${event.type}" name="type" class="form-control">
+        </label>
+    </div>
+    <div class="form-group">
+        <label>
             <input type="hidden" th:value="${event.id}" name="eventId" />
         </label>
     </div>
