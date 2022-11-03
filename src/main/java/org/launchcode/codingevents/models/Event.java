@@ -2,18 +2,15 @@ package org.launchcode.codingevents.models;
 
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Objects;
+
 
 @Entity
-public class Event {
-    @Id
-    @GeneratedValue
-    private int id;
+public class Event extends AbstractEntity {
     @NotBlank(message = "Name is a required field. Must not be blank.")
     @Size(min = 3, max = 50, message = "Name must be between 3 and 50 characters.")
     private String name;
@@ -33,14 +30,15 @@ public class Event {
 //
 //    @Positive(message = "Number of Attendees must be greater than zero")
 //    private int numberOfAttendees;
+    @ManyToOne
+    @NotNull(message = "Category is required")
+    private EventCategory eventCategory;
 
-    private EventType type;
 
-
-    public Event(String name, String description, String contactEmail, EventType type) {
+    public Event(String name, String description, String contactEmail, EventCategory eventCategory) {
         this.description = description;
         this.contactEmail = contactEmail;
-        this.type = type;
+        this.eventCategory = eventCategory;
     }
 
 
@@ -48,13 +46,7 @@ public class Event {
     public Event(){
     }
 
-    public String getLocation(){
-        return this.location;
-    }
 
-    public void setLocation(String location){
-        this.location = location;
-    }
 
 
     public String getName() {
@@ -73,20 +65,26 @@ public class Event {
         this.description = description;
     }
 
+    public String getLocation(){
+        return this.location;
+    }
+
+    public void setLocation(String location){
+        this.location = location;
+    }
+
     public String getContactEmail() {return contactEmail;}
     public void setContactEmail(String contactEmail) {this.contactEmail = contactEmail;}
 
-    public EventType getType() {return type;}
-
-    public void setType(EventType type) {
-        this.type = type;
+    public EventCategory getEventCategory() {
+        return eventCategory;
     }
 
-    public int getId() {
-        return id;
+    public void setEventCategory(EventCategory eventCategory) {
+        this.eventCategory = eventCategory;
     }
 
-//    public boolean isMustRegister() {
+    //    public boolean isMustRegister() {
 //        return mustRegister;
 //    }
 //
@@ -107,16 +105,4 @@ public class Event {
         return name;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Event event = (Event) o;
-        return id == event.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }
